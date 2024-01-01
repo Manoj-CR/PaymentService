@@ -1,6 +1,6 @@
 package com.example.paymentservice.paymentStrategy;
 
-public interface PaymentStrategy {
-    public String generatePaymentLink();
+public interface PaymentGateway {
+    public String generatePaymentLink(String orderId,String email, String phoneNumber,Long amount);
 
 }

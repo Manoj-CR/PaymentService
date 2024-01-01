@@ -1,9 +1,9 @@
-package org.example.orderservice.kafka.dto;
+package com.example.paymentservice.kafka.dto;
 
+import com.example.paymentservice.dto.InitiatePaymentDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.orderservice.model.Order;
 
 @Data
 @AllArgsConstructor
@@ -12,5 +12,8 @@ public class OrderEvent {
 
     private String message;
     private String status;
-    private Order order;
+    private String email;
+    private String phoneNumber;
+    private Long orderId;
+    private Double amount;
 }

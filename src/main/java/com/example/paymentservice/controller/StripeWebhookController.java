@@ -1,7 +1,7 @@
 package com.example.paymentservice.controller;
 
 
-import com.stripe.exception.SignatureVerificationException;
+import com.example.paymentservice.service.StripeWebhookService;
 import com.stripe.model.Event;
 import com.stripe.net.Webhook;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,30 +13,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/stripeWebhook")
-public class StripeWebhook {
+public class StripeWebhookController {
 
-@Value("${Stripe.key.webhooksSecret}")
-    private String endpointSecret ;
+
+
+    private StripeWebhookService stripeWebhookService;
+
+    public StripeWebhookController(StripeWebhookService stripeWebhookService){
+        this.stripeWebhookService=stripeWebhookService;
+    }
     @PostMapping("")
     public void receiveWebhookEvents(@RequestBody String json, HttpServletRequest httpRequest) {
-        System.out.println("Waiting");
-        String header = httpRequest.getHeader("Stripe-Signature");
-
-        Event event = validateStripeHeadersAndReturnEvent(json, httpRequest.getHeader("Stripe-Signature"));
-System.out.println("Waiting");
-        if (event.getType().equals("payment_intent.succeeded")) {
-            System.out.println("Payment Sucess");
-        }
+        stripeWebhookService.receiveWebhookEvents(json,httpRequest);
     }
 
-    private Event validateStripeHeadersAndReturnEvent(String payload, String headers) {
-        try {
-            return Webhook.constructEvent(
-                    payload, headers, endpointSecret
-            );
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Invalid payload"+ e.getMessage());
-        }
-    }
 }
