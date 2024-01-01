@@ -14,7 +14,7 @@ public class PaymentService {
         this.paymentGatewayChooserStrategy = paymentGatewayChooserStrategy;
     }
 
-    public String initiatePayment(Long amount, String email, String orderId, String phoneNumber) {
+    public String initiatePayment(Double amount, String email, Long orderId, String phoneNumber) {
 
         PaymentGateway paymentGateway=paymentGatewayChooserStrategy.getBestPaymentGateway();
 
