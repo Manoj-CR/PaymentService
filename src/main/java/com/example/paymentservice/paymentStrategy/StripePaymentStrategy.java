@@ -19,10 +19,10 @@ public class StripePaymentStrategy implements PaymentGateway {
 
     @Value("${Stripe.key.secret}")
     private String apiKey;
+
     @Override
-    public String generatePaymentLink(String orderId,
-                                      String email, String phoneNumber, Long amount) {
-        Stripe.apiKey = apiKey;
+    public String generatePaymentLink(String orderId, String email, String phoneNumber, Double amount) {
+            Stripe.apiKey = apiKey;
             Map<String, Object> params = new HashMap<>();
             params.put("name", orderId);
             Map<String, String> metadata = new HashMap<>();
@@ -83,4 +83,6 @@ public class StripePaymentStrategy implements PaymentGateway {
             }
             return paymentLink.getUrl()+"?customer_id="+orderId;
         }
+
+
 }

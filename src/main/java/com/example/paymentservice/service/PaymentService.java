@@ -18,6 +18,6 @@ public class PaymentService {
 
         PaymentGateway paymentGateway=paymentGatewayChooserStrategy.getBestPaymentGateway();
 
-        return paymentGateway.generatePaymentLink(orderId,email,phoneNumber,amount);
+        return paymentGateway.generatePaymentLink(orderId.toString(),email,phoneNumber,amount);
     }
 }

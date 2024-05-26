@@ -18,7 +18,9 @@ public class StripeCronJobStatusController {
     private StripeCronJobService stripeCronJobService;
 
     //Eevry 5 min it will do a cron job
-    @Scheduled(cron = "*/10 * * * * *")
+//    @Scheduled(cron = "*/10 * * * * *")
+//    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0/1 * * * ?")
     public void getPendingTransactionStatus(){
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
